@@ -1,21 +1,53 @@
-# iterm2
+#!/bin/bash
+
+######## Warmup ########
+# set -e # exit on error
+set +x # echo commands
+pushd $(dirname "$0")
+
+######## zsh ########
+## Install
+rm -rf ~/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+## Import settings
+cp ./com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+
+
+######## brew ########
+## Install
+# If first/main user, uncomment this line
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# If multi user (brew is alreadu installed), uncomment these lines
+# This will install brew in the current directory and export it to the $PATH. Don't remove the folder afterwards.
+BREW_INSTALL_DIR=$(pwd)/brew
+mkdir brew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C brew
+echo "export PATH=$BREW_INSTALL_DIR/bin:$PATH" >> ~/.zshrc
+printf "\n" >> ~/.zshrc
+
+######## iterm2 ########
 ## Install
 brew install --cask iterm2
 
-## Import settings
-mv ./com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
-# zsh
-## Install
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-## Install pure https://github.com/sindresorhus/pure
+######## zsh config ########
+## Install pure
 brew install pure
 
 ## Config pure
-echo """
+cat <<EOF >> ~/.zshrc
 autoload -U promptinit; promptinit
 prompt pure
 
 export DOTNET_CLI_UI_LANGUAGE=en
-"""" >> ~/.zshrc
+EOF
+printf "\n" >> ~/.zshrc
+
+
+######## git ########
+brew install --cask git-credential-manager
+
+######## Clean ########
+exec $SHELL
+popd
+set -x
