@@ -47,6 +47,14 @@ printf "\n" >> ~/.zshrc
 ######## git ########
 brew install --cask git-credential-manager
 
+######## ollama ########
+read -p "Do you want to install Ollama (local LLM server)? (y/n): " answer
+if [[ $answer =~ ^[Yy]$ ]]
+then
+  brew install --cask ollama
+  echo "Reminder: $> ollama serve to start the server, and $> ollama run <model> (e.g. llama3.1) to run a model."
+fi
+
 ######## Clean ########
 exec $SHELL
 popd
