@@ -55,6 +55,14 @@ then
   echo "Reminder: $> ollama serve to start the server, and $> ollama run <model> (e.g. llama3.1) to run a model."
 fi
 
+
+######## Github CLI ########
+read -p "Do you want to install Github CLI? (y/n): " answer
+if [[ $answer =~ ^[Yy]$ ]]
+then
+   brew install gh
+fi
+
 ######## Clean ########
 exec $SHELL
 popd
