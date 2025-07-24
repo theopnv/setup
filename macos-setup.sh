@@ -16,14 +16,14 @@ cp ./com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.pli
 ######## brew ########
 ## Install
 # If first/main user, uncomment this line
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # If multi user (brew is alreadu installed), uncomment these lines
 # This will install brew in the current directory and export it to the $PATH. Don't remove the folder afterwards.
-BREW_INSTALL_DIR=$(pwd)/brew
-mkdir brew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C brew
-echo "export PATH=$BREW_INSTALL_DIR/bin:$PATH" >> ~/.zshrc
-printf "\n" >> ~/.zshrc
+# BREW_INSTALL_DIR=$(pwd)/brew
+# mkdir brew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C brew
+# echo "export PATH=$BREW_INSTALL_DIR/bin:$PATH" >> ~/.zshrc
+# printf "\n" >> ~/.zshrc
 
 ######## iterm2 ########
 ## Install
@@ -46,6 +46,10 @@ printf "\n" >> ~/.zshrc
 
 ######## git ########
 brew install --cask git-credential-manager
+## Install git hooks
+mkdir -p ~/.config/global_git_hooks
+cp ./hooks/* ~/.config/global_git_hooks/
+git config --global core.hooksPath .config/global_git_hooks
 
 ######## ollama ########
 read -p "Do you want to install Ollama (local LLM server)? (y/n): " answer
