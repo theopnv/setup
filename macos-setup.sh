@@ -15,15 +15,10 @@ cp ./com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.pli
 
 ######## brew ########
 ## Install
-# If first/main user, uncomment this line
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+## Note: In case of multiple users, run subsequent commands with `sudo -Hu <username>`.
+## See https://archive.is/n2YAr ("The good: dedicate a single user account to Homebrew")
 
-# If multi user (brew is alreadu installed), uncomment these lines
-# This will install brew in the current directory and export it to the $PATH. Don't remove the folder afterwards.
-# BREW_INSTALL_DIR=$(pwd)/brew
-# mkdir brew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C brew
-# echo "export PATH=$BREW_INSTALL_DIR/bin:$PATH" >> ~/.zshrc
-# printf "\n" >> ~/.zshrc
 
 ######## iterm2 ########
 ## Install
